@@ -7,7 +7,7 @@
 * [Selenium](https://www.seleniumhq.org/) – web automation
 * [Page Object Model](https://www.seleniumhq.org/docs/06_test_design_considerations.jsp) – design pattern to abstract page behaviour
 * [Spring Boot](http://spring.io/projects/spring-boot) – cleaner code
-* [mockNeat](http://https://www.mockneat.com/) - random data generator library
+* [mockNeat](https://www.mockneat.com/) - random data generator library
 
 ## Set up
 ### Install 
