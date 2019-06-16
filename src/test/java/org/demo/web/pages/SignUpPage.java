@@ -3,6 +3,7 @@ package org.demo.web.pages;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.demo.web.runner.WebInitializer;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 @Slf4j
 public class SignUpPage extends WebInitializer {
@@ -41,7 +44,7 @@ public class SignUpPage extends WebInitializer {
     @FindBy(how = How.CSS, using = "input[type='radio'][value='2']")
     private WebElement genderMale;
 
-    @FindBy(how = How.ID, using = "input[type='radio'][value='1']")
+    @FindBy(how = How.CSS, using = "input[type='radio'][value='1']")
     private WebElement genderFemale;
 
     @FindBy(how = How.NAME, using = "websubmit")
@@ -81,10 +84,10 @@ public class SignUpPage extends WebInitializer {
     public void feedGender(final String genderParam) {
         if (StringUtils.isNotBlank(genderParam) && genderParam.equals("female")) {
             genderFemale.click();
-            driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         } else {
             genderMale.click();
-            driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         }
     }
 
@@ -109,5 +112,12 @@ public class SignUpPage extends WebInitializer {
 
     public SignUpPage() {
         PageFactory.initElements(driver, this);
+    }
+
+    public void verifyLoggedInUser(final String firstName, WebDriver driver) {
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"bluebar_profile_and_home\"]/div/div/a/span/span"));
+        log.debug(element.getText());
+        log.debug("firstName: " + firstName);
+        assertEquals(element.getText(), firstName);
     }
 }
